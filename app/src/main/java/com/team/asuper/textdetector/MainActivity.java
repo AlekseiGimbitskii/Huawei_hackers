@@ -1,6 +1,7 @@
 package com.team.asuper.textdetector;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -32,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void startCamera(View view){
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
     }
 
     public void detectText(View view) {
