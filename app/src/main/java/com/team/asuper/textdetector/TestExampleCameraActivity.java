@@ -159,7 +159,9 @@ public class TestExampleCameraActivity extends AppCompatActivity {
 
         try {
 
-            cameraSource.setMachineLearningFrameProcessor(new TextRecognitionProcessor(this));
+            TextRecognitionProcessor textRecognitionProcessor = new TextRecognitionProcessor(this);
+            textRecognitionProcessor.setTargetWord("Microsoft");
+            cameraSource.setMachineLearningFrameProcessor(textRecognitionProcessor);
 
         } catch (Exception e) {
             Log.d(TAG, "createCameraSource can not create camera source: " + e.getCause());

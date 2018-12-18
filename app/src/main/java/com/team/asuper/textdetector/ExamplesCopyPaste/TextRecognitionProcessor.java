@@ -23,11 +23,18 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
 
     private static final String TAG = "TextRecProc";
 
+    private String targetWord;
+    public void setTargetWord(String targetWord) {
+        this.targetWord = targetWord;
+    }
+
     private final FirebaseVisionTextRecognizer detector;
 
     public TextRecognitionProcessor(TestExampleCameraActivity testExampleCameraActivity) {
         detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
     }
+
+
 
     @Override
     public void stop() {
@@ -61,9 +68,16 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
             for (int j = 0; j < lines.size(); j++) {
                 List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
                 for (int k = 0; k < elements.size(); k++) {
+                    if(elements.get(k).getText().equalsIgnoreCase(targetWord)){
+                        GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay,
+                                elements.get(k));
+                        graphicOverlay.add(textGraphic);
+                    }
+                    /*
                     GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay,
                             elements.get(k));
                     graphicOverlay.add(textGraphic);
+                    */
                 }
             }
         }
@@ -74,4 +88,5 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
     protected void onFailure(@NonNull Exception e) {
         Log.w(TAG, "Text detection failed." + e);
     }
+
 }
