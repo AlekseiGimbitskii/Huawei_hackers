@@ -14,18 +14,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
-import com.team.asuper.textdetector.ExamplesCopyPaste.CameraSource;
-import com.team.asuper.textdetector.ExamplesCopyPaste.CameraSourcePreview;
-import com.team.asuper.textdetector.ExamplesCopyPaste.GraphicOverlay;
-import com.team.asuper.textdetector.ExamplesCopyPaste.TextRecognitionProcessor;
-import com.team.asuper.textdetector.R;
+import com.team.asuper.textdetector.fromFirebaseExamples.CameraSource;
+import com.team.asuper.textdetector.fromFirebaseExamples.CameraSourcePreview;
+import com.team.asuper.textdetector.fromFirebaseExamples.GraphicOverlay;
+import com.team.asuper.textdetector.fromFirebaseExamples.TextRecognitionProcessor;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class TestExampleCameraActivity extends AppCompatActivity {
+public class TextDetectionCameraActivity extends AppCompatActivity {
     private static final String TAG = "TestExCameraActivity";
     private CameraSourcePreview preview; // To handle the camera
     private GraphicOverlay graphicOverlay; // To draw over the camera screen

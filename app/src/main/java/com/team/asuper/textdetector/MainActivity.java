@@ -1,15 +1,11 @@
 package com.team.asuper.textdetector;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,9 +16,6 @@ import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
-
-import java.io.FileInputStream;
-import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,16 +28,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void startTestCamera(View view){
-        Intent intent = new Intent(this, TestExampleCameraActivity.class);
+    public void startCamera(View view){
+        Intent intent = new Intent(this, TextDetectionCameraActivity.class);
         startActivity(intent);
     }
 
+    /*
     public void startCamera(View view){
         Intent intent = new Intent(this, CameraActivity.class);
         startActivity(intent);
     }
-
+    */
     public void detectText(View view) {
         // Do something in response to button
 

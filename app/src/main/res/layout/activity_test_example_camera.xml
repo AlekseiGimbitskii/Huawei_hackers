@@ -9,14 +9,14 @@
     android:keepScreenOn="true"
     android:orientation="vertical">
 
-    <com.team.asuper.textdetector.ExamplesCopyPaste.CameraSourcePreview
+    <com.team.asuper.textdetector.fromFirebaseExamples.CameraSourcePreview
         android:id="@+id/Preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
 
-        <com.team.asuper.textdetector.ExamplesCopyPaste.GraphicOverlay
+        <com.team.asuper.textdetector.fromFirebaseExamples.GraphicOverlay
             android:id="@+id/Overlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -24,7 +24,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true" />
 
-    </com.team.asuper.textdetector.ExamplesCopyPaste.CameraSourcePreview>
+    </com.team.asuper.textdetector.fromFirebaseExamples.CameraSourcePreview>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/control"

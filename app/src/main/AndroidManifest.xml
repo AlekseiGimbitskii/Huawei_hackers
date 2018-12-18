@@ -26,7 +26,7 @@
         <activity
             android:name=".CameraActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".TestExampleCameraActivity"></activity>
+        <activity android:name=".TextDetectionCameraActivity"></activity>
     </application>
 
 </manifest>

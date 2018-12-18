@@ -1,4 +1,4 @@
-package com.team.asuper.textdetector.ExamplesCopyPaste;
+package com.team.asuper.textdetector.fromFirebaseExamples;
 
 
 import android.graphics.Bitmap;
@@ -11,7 +11,7 @@ import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
-import com.team.asuper.textdetector.TestExampleCameraActivity;
+import com.team.asuper.textdetector.TextDetectionCameraActivity;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,7 +30,7 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
 
     private final FirebaseVisionTextRecognizer detector;
 
-    public TextRecognitionProcessor(TestExampleCameraActivity testExampleCameraActivity) {
+    public TextRecognitionProcessor(TextDetectionCameraActivity textDetectionCameraActivity) {
         detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
     }
 

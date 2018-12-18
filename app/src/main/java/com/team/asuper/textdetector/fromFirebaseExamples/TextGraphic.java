@@ -1,4 +1,4 @@
-package com.team.asuper.textdetector.ExamplesCopyPaste;
+package com.team.asuper.textdetector.fromFirebaseExamples;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

@@ -1,4 +1,4 @@
-package com.team.asuper.textdetector.ExamplesCopyPaste;
+package com.team.asuper.textdetector.fromFirebaseExamples;
 
 /** Describing a frame info. */
 public class FrameMetadata {
