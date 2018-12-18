@@ -22,7 +22,9 @@
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="ocr" />
 
-        <activity android:name=".CameraActivity"></activity>
+        <activity android:name=".CameraActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

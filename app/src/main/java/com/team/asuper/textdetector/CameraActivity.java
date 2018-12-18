@@ -3,7 +3,10 @@ package com.team.asuper.textdetector;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Camera;
+import android.graphics.Matrix;
+import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -209,5 +212,4 @@ public class CameraActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 }
