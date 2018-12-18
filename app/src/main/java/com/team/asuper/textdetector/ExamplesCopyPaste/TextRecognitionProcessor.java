@@ -11,6 +11,7 @@ import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
+import com.team.asuper.textdetector.TestExampleCameraActivity;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,7 +25,7 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
 
     private final FirebaseVisionTextRecognizer detector;
 
-    public TextRecognitionProcessor() {
+    public TextRecognitionProcessor(TestExampleCameraActivity testExampleCameraActivity) {
         detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
     }
 
