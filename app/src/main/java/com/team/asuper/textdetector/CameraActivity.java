@@ -4,8 +4,11 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Camera;
 import android.graphics.Matrix;
+import android.graphics.PixelFormat;
 import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -15,17 +18,32 @@ import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Size;
 import android.view.Surface;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.TextureView;
+import android.view.View;
+import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 import java.util.Collections;
 import java.util.zip.ZipInputStream;
+
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -33,6 +51,7 @@ public class CameraActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST_CODE = 0xAA;
     CameraManager cameraManager;
     int cameraFacing;
+    SurfaceView surfaceView;
     TextureView textureView;
     TextureView.SurfaceTextureListener surfaceTextureListener;
     private Size previewSize;
@@ -44,6 +63,12 @@ public class CameraActivity extends AppCompatActivity {
     private CaptureRequest captureRequest;
     private Handler backgroundHandler;
     private HandlerThread backgroundThread;
+    private SurfaceHolder surfaceTrackHolder;
+    private TextView textview;
+    private Handler handler;
+    private Runnable runnable;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +79,15 @@ public class CameraActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
 
         textureView = (TextureView) findViewById(R.id.textureView);
+
+        textview = (TextView) findViewById(R.id.textView);
+
+        /*
+        surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
+        surfaceView.setZOrderOnTop(true);    // necessary
+        surfaceTrackHolder = surfaceView.getHolder();
+        surfaceTrackHolder.setFormat(PixelFormat.TRANSPARENT);
+        */
 
         cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         cameraFacing = CameraCharacteristics.LENS_FACING_BACK;
@@ -100,6 +134,16 @@ public class CameraActivity extends AppCompatActivity {
                 CameraActivity.this.cameraDevice = null;
             }
         };
+
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                detectText(textureView.getBitmap());
+                handler.postDelayed(this, 1000);
+            }
+        };
+
     }
 
     @Override
@@ -109,6 +153,7 @@ public class CameraActivity extends AppCompatActivity {
         if (textureView.isAvailable()) {
             setUpCamera();
             openCamera();
+            handler.postDelayed(runnable, 1000);
         } else {
             textureView.setSurfaceTextureListener(surfaceTextureListener);
         }
@@ -211,5 +256,32 @@ public class CameraActivity extends AppCompatActivity {
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void detectText(Bitmap bitmap) {
+
+
+        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
+        FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
+
+        Task<FirebaseVisionText> result = detector.processImage(image)
+
+                .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+                    @Override
+                    public void onSuccess(FirebaseVisionText firebaseVisionText) {
+                        //textview.setText("success");
+                        String resultText = firebaseVisionText.getText();
+                        textview.setText(resultText);
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        textview.setText("failure");
+                    }
+                });
+
     }
 }
