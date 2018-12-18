@@ -14,6 +14,7 @@ import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 import com.team.asuper.textdetector.TextDetectionCameraActivity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,9 +24,9 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
 
     private static final String TAG = "TextRecProc";
 
-    private String targetWord;
-    public void setTargetWord(String targetWord) {
-        this.targetWord = targetWord;
+    private List<String> targetWords;
+    public void setTargetWords(List<String> targetWords) {
+        this.targetWords = new ArrayList<String>(targetWords);
     }
 
     private final FirebaseVisionTextRecognizer detector;
@@ -68,10 +69,12 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
             for (int j = 0; j < lines.size(); j++) {
                 List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
                 for (int k = 0; k < elements.size(); k++) {
-                    if(elements.get(k).getText().equalsIgnoreCase(targetWord)){
-                        GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay,
-                                elements.get(k));
-                        graphicOverlay.add(textGraphic);
+                    for (int l = 0; l < targetWords.size(); l++){
+                        if(elements.get(k).getText().equalsIgnoreCase(targetWords.get(l))) {
+                            GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay,
+                                    elements.get(k));
+                            graphicOverlay.add(textGraphic);
+                        }
                     }
                     /*
                     GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay,

@@ -17,7 +17,12 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    private ArrayList<String> targetWords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +30,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
+        targetWords = new ArrayList<String>();
+        targetWords.add("hello");
+        targetWords.add("MiCrosOft");
+        targetWords.add("peAnuT");
+        targetWords.add("huawei");
     }
 
     public void startCamera(View view){
         Intent intent = new Intent(this, TextDetectionCameraActivity.class);
+        intent.putExtra("targetWords", targetWords);
         startActivity(intent);
     }
 

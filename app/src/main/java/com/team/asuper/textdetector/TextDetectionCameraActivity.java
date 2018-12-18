@@ -35,11 +35,16 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
     private Adapter displayAdapter; // adapter bound with the result recycler view ---> Contains a simple textview with background
     private TextView resultNumberTv;// to display the number of results
     private LinearLayout resultContainer;// just another layout to maintain the symmetry
+    private ArrayList<String> targetWords;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_example_camera);
+
+        targetWords = new ArrayList<String>();
+        targetWords = (ArrayList<String>) getIntent().getSerializableExtra("targetWords");
 
         // getting views from the xml
         resultNumberTv = (TextView) findViewById(R.id.resultsMessageTv);
@@ -159,7 +164,7 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
         try {
 
             TextRecognitionProcessor textRecognitionProcessor = new TextRecognitionProcessor(this);
-            textRecognitionProcessor.setTargetWord("Microsoft");
+            textRecognitionProcessor.setTargetWords(targetWords);
             cameraSource.setMachineLearningFrameProcessor(textRecognitionProcessor);
 
         } catch (Exception e) {
