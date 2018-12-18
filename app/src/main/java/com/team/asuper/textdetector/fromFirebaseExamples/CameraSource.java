@@ -70,8 +70,10 @@ public class CameraSource {
     // These values may be requested by the caller.  Due to hardware limitations, we may need to
     // select close, but not exactly the same values for these.
     private final float requestedFps = 20.0f;
-    private final int requestedPreviewWidth = 480;
-    private final int requestedPreviewHeight = 360;
+    //private final int requestedPreviewWidth = 480;
+    //private final int requestedPreviewHeight = 360;
+    private int requestedPreviewWidth = 600;
+    private int requestedPreviewHeight = 480;
     private final boolean requestedAutoFocus = true;
 
     // These instances need to be held onto to avoid GC of their underlying resources.  Even though
@@ -111,6 +113,7 @@ public class CameraSource {
     private final Map<byte[], ByteBuffer> bytesToByteBuffer = new IdentityHashMap<>();
 
     public CameraSource(Activity activity, GraphicOverlay overlay) {
+
         this.activity = activity;
         graphicOverlay = overlay;
         graphicOverlay.clear();

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.hardware.camera2.CameraAccessException;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +14,7 @@ import android.widget.Adapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.common.images.Size;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.team.asuper.textdetector.fromFirebaseExamples.CameraSource;
 import com.team.asuper.textdetector.fromFirebaseExamples.CameraSourcePreview;
@@ -29,13 +31,8 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
     private CameraSourcePreview preview; // To handle the camera
     private GraphicOverlay graphicOverlay; // To draw over the camera screen
     private CameraSource cameraSource = null; //To handle the camera
-    private TextView resultSpinner;// To display the results recieved from Firebase MLKit
     private static final int PERMISSION_REQUESTS = 1; // to handle the runtime permissions
-    private List<String> displayList; // to manage the adapter of the results recieved
-    private Adapter displayAdapter; // adapter bound with the result recycler view ---> Contains a simple textview with background
-    private TextView resultNumberTv;// to display the number of results
-    private LinearLayout resultContainer;// just another layout to maintain the symmetry
-    private ArrayList<String> targetWords;
+    private ArrayList<String> targetWords; //store words to be found
 
 
     @Override
@@ -47,20 +44,11 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
         targetWords = (ArrayList<String>) getIntent().getSerializableExtra("targetWords");
 
         // getting views from the xml
-        resultNumberTv = (TextView) findViewById(R.id.resultsMessageTv);
-        resultContainer = (LinearLayout) findViewById(R.id.resultsContainer);
         preview = (CameraSourcePreview) findViewById(R.id.Preview);
         graphicOverlay = (GraphicOverlay) findViewById(R.id.Overlay);
 
 
         // intializing views
-        displayList = new ArrayList<>();
-        //resultSpinner.setLayoutManager(new LinearLayoutManager(LauncherActivity.this, LinearLayoutManager.VERTICAL, false));
-        //displayAdapter = new Adapte(LauncherActivity.this, displayList);
-        //resultSpinner.setAdapter(displayAdapter);
-        resultContainer.getLayoutParams().height = (int) (Resources.getSystem().getDisplayMetrics().heightPixels * 0.65);
-        //resultNumberTv.setText(getString(R.string.x_results_found, displayList.size()));
-
         if (preview == null) {
             Log.d(TAG, " Preview is null ");
         }
@@ -68,11 +56,21 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
         if (graphicOverlay == null) {
             Log.d(TAG, "graphicOverlay is null ");
         }
+
+        try {
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
+                createCameraSource();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /*
         if (true) {
             createCameraSource();
         } else {
             getRuntimePermissions();
-        }
+        }*/
     }
 
     @Override
@@ -113,6 +111,7 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
         }
     }
 
+    /*
     // Function to check if all permissions given by the user
     private boolean allPermissionsGranted() {
         for (String permission : getRequiredPermissions()) {
@@ -122,6 +121,7 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
         }
         return true;
     }
+
 
     // List of permissions required by the application to run.
     private String[] getRequiredPermissions() {
@@ -153,7 +153,7 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
                     this, allNeededPermissions.toArray(new String[0]), PERMISSION_REQUESTS);
         }
     }
-
+    */
     // Function to create a camera source and retain it.
     private void createCameraSource() {
         // If there's no existing cameraSource, create one.
@@ -162,7 +162,7 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
         }
 
         try {
-
+            //original textRecognitionProcessor was changed to display only target words
             TextRecognitionProcessor textRecognitionProcessor = new TextRecognitionProcessor(this);
             textRecognitionProcessor.setTargetWords(targetWords);
             cameraSource.setMachineLearningFrameProcessor(textRecognitionProcessor);
@@ -173,7 +173,7 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
         }
     }
 
-
+    /*
     //  updating and displaying the results recieved from Firebase Text Processor Api
     public void updateSpinnerFromTextResults(FirebaseVisionText textresults) {
         List<FirebaseVisionText.TextBlock> blocks = textresults.getTextBlocks();
@@ -188,5 +188,5 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
         }
         //resultNumberTv.setText(getString(R.string.x_results_found, displayList.size()));
         //displayAdapter.notifyDataSetChanged();
-    }
+    }*/
 }
