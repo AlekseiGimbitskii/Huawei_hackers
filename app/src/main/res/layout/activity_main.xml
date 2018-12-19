@@ -8,12 +8,33 @@
     tools:ignore="ExtraText"
     android:id="@+id/activity_main">
 
-     <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+        <Button
+            android:id="@+id/startbutton"
+            android:layout_width="194dp"
+            android:layout_height="59dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="24dp"
+            android:onClick="startCamera"
+            android:text="Start Camera"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -24,16 +45,9 @@
         app:menu="@menu/drawer_menu"
         app:headerLayout="@layout/header"/>
 
-    <Button
-        android:id="@+id/buttonStartCamera"
-        android:layout_width="163dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="startCamera"
-        android:text="Start Camera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
 
 </android.support.v4.widget.DrawerLayout>

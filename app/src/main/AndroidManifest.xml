@@ -14,7 +14,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning"
         >
-        <activity android:name=".MainActivity">
+        <activity android:name="MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,9 +26,7 @@
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="ocr" />
 
-        <activity
-            android:name=".CameraActivity"
-            android:screenOrientation="portrait" />
+
         <activity android:name=".TextDetectionCameraActivity" />
 
     </application>
