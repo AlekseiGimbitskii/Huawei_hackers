@@ -6,8 +6,25 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_home"
+            android:onClick="showMainPage"
+            android:title="Home Page" />
+        <item
             android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_camera"
+            android:onClick="startCamera"
             android:title="Camera" />
+        <item
+            android:id="@+id/words"
+            android:icon="@drawable/ic_font"
+            android:onClick="showWords"
+            android:title="Words to find" />
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_settings"
+            android:onClick="showSetting"
+            android:title="Settings" />
     </group>
 
 

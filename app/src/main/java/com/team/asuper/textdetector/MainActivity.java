@@ -76,6 +76,24 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void showMainPage(MenuItem item){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("targetWords", targetWords);
+        startActivity(intent);
+    }
+
+    public void showSetting(MenuItem item){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("targetWords", targetWords);
+        startActivity(intent);
+    }
+
+    public void showWords(MenuItem item){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("targetWords", targetWords);
+        startActivity(intent);
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
