@@ -80,7 +80,6 @@ public class CameraActivity extends AppCompatActivity {
 
         textureView = (TextureView) findViewById(R.id.textureView);
 
-        textview = (TextView) findViewById(R.id.textView);
 
         /*
         surfaceView = (SurfaceView) findViewById(R.id.surfaceView);

@@ -1,21 +1,12 @@
 package com.team.asuper.textdetector;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.hardware.camera2.CameraAccessException;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Adapter;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.google.android.gms.common.images.Size;
-import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.team.asuper.textdetector.fromFirebaseExamples.CameraSource;
 import com.team.asuper.textdetector.fromFirebaseExamples.CameraSourcePreview;
 import com.team.asuper.textdetector.fromFirebaseExamples.GraphicOverlay;
@@ -23,7 +14,6 @@ import com.team.asuper.textdetector.fromFirebaseExamples.TextRecognitionProcesso
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TextDetectionCameraActivity extends AppCompatActivity {
@@ -33,6 +23,7 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
     private CameraSource cameraSource = null; //To handle the camera
     private static final int PERMISSION_REQUESTS = 1; // to handle the runtime permissions
     private ArrayList<String> targetWords; //store words to be found
+
 
 
     @Override
@@ -57,6 +48,8 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
             Log.d(TAG, "graphicOverlay is null ");
         }
 
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUESTS);
+
         try {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
                     == PackageManager.PERMISSION_GRANTED) {
@@ -65,6 +58,7 @@ public class TextDetectionCameraActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         /*
         if (true) {
             createCameraSource();
