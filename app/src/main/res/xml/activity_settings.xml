@@ -1,0 +1,12 @@
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.preference.SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="vibrate_on_found"
+        android:title="@string/pref_title_vibrate"
+        android:summary="Vibrate, when needed word was found"/>
+
+
+
+
+</android.support.v7.preference.PreferenceScreen>
