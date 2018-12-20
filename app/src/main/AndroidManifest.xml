@@ -28,6 +28,8 @@
 
 
         <activity android:name=".TextDetectionCameraActivity" />
+        <activity android:name="AddWordsActivity" />
+
 
     </application>
 

@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showWords(MenuItem item){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, AddWordsActivity.class);
         startActivity(intent);
     }
 
