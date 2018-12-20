@@ -20,6 +20,7 @@ public class AddWordsActivity extends AppCompatActivity {
     public void addWord(View view) {
         EditText edit = findViewById(R.id.editText);
         String newWord = edit.getText().toString();
+        edit.setText("");
         // save newWord to the end of file (or other method of storage)
         MainActivity.targetWords.add(newWord);
 
@@ -47,5 +48,16 @@ public class AddWordsActivity extends AppCompatActivity {
         // add values to view editText2
         TextView edit2 = findViewById(R.id.textView2);
         edit2.setText(words);
+    }
+
+    public void clearWords(View view) {
+        MainActivity.targetWords.clear();
+
+        SharedPreferences sharedPref = MainActivity.context.getSharedPreferences("targetWordList", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("targetWordList", "");
+        editor.commit();
+
+        showWords();
     }
 }
