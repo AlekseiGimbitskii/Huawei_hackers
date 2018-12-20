@@ -4,6 +4,7 @@
     <string name="add_words_button">Add Word</string>
     <string name="add_words_text_field">Type new word</string>
     <string name="add_words_list">The list with your words will appear here</string>
+    <string name="add_words_clear_list">Clear list</string>
 
     <string name="title_activity_settings">Settings</string>
 
