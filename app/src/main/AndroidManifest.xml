@@ -29,6 +29,7 @@
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="ocr" />
 
+
         <activity android:name=".TextDetectionCameraActivity"
             android:launchMode="singleTask"/>
 
@@ -36,6 +37,9 @@
             android:name=".SpeechRecognitionService"
             android:enabled="true"
             android:exported="true"></service>
+
+        <activity android:name=".SettingsActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>
