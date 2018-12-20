@@ -1,5 +1,6 @@
 package com.team.asuper.textdetector;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -31,6 +32,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<String> targetWords;
+    public static Context context;
     private DrawerLayout mDrawerLayout;
 
     private static final int REQUEST_RECORD_AUDIO = 13;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        context = getApplicationContext();
 
         targetWords = new ArrayList<String>();
         targetWords.add("hello");

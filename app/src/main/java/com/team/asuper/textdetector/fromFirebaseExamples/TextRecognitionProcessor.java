@@ -1,10 +1,13 @@
 package com.team.asuper.textdetector.fromFirebaseExamples;
 
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.VibrationEffect;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.os.Vibrator;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.vision.FirebaseVision;
@@ -12,10 +15,13 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 import com.team.asuper.textdetector.TextDetectionCameraActivity;
+import com.team.asuper.textdetector.MainActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.VIBRATOR_SERVICE;
 
 /**
  * Processor for the text recognition demo.
@@ -74,6 +80,8 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
                             GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay,
                                     elements.get(k));
                             graphicOverlay.add(textGraphic);
+                            Vibrator vibrator = (Vibrator) MainActivity.context.getSystemService(VIBRATOR_SERVICE);
+                            vibrator.vibrate(VibrationEffect.createOneShot(25, VibrationEffect.DEFAULT_AMPLITUDE));
                         }
                     }
                     /*
