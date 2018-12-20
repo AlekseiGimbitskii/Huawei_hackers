@@ -30,7 +30,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<String> targetWords;
+    public static ArrayList<String> targetWords;
     private DrawerLayout mDrawerLayout;
 
     private static final int REQUEST_RECORD_AUDIO = 13;
@@ -81,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        Intent intent = new Intent(MainActivity.this, SpeechRecognitionService.class);
+        stopService(intent);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
         Intent intent = new Intent(MainActivity.this, SpeechRecognitionService.class);
         stopService(intent);
     }

@@ -1,6 +1,7 @@
 package com.team.asuper.textdetector;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
@@ -26,6 +27,8 @@ import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
 import com.team.asuper.textdetector.fromTensorflowExamples.RecognizeCommands;
+import com.team.asuper.textdetector.TextDetectionCameraActivity;
+import com.team.asuper.textdetector.MainActivity;
 
 public class SpeechRecognitionService extends Service {
 
@@ -104,8 +107,10 @@ public class SpeechRecognitionService extends Service {
         // Load the TensorFlow model.
         inferenceInterface = new TensorFlowInferenceInterface(getAssets(), MODEL_FILENAME);
 
-        // Start the recording and recognition threads.
         handler = new Handler();
+
+
+        // Start the recording and recognition threads.
         startRecording();
         startRecognition();
         return Service.START_NOT_STICKY;
@@ -275,6 +280,17 @@ public class SpeechRecognitionService extends Service {
                                         labelIndex = i;
                                         String label = labels.get(labelIndex);
                                         Log.v(LOG_TAG, label);
+                                        if (label.equals("go")){
+                                            Intent intent = new Intent(getBaseContext(), TextDetectionCameraActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            intent.putExtra("targetWords", MainActivity.targetWords);
+                                            getApplication().startActivity(intent);
+                                        }
+                                        if (label.equals("stop")){
+                                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            getApplication().startActivity(intent);
+                                        }
                                     }
                                 }
                             }

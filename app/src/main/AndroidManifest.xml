@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +28,8 @@
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="ocr" />
 
-        <activity android:name=".TextDetectionCameraActivity" />
+        <activity android:name=".TextDetectionCameraActivity"
+            android:launchMode="singleTask"/>
 
         <service
             android:name=".SpeechRecognitionService"
