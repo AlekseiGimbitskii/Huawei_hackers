@@ -2,6 +2,7 @@ package com.team.asuper.textdetector;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -45,10 +46,13 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         targetWords = new ArrayList<String>();
-        targetWords.add("hello");
-        targetWords.add("MiCrosOft");
-        targetWords.add("peAnuT");
-        targetWords.add("huawei");
+
+        SharedPreferences sharedPref = MainActivity.context.getSharedPreferences("targetWordList", Context.MODE_PRIVATE);
+        String csvList = sharedPref.getString("targetWordList", "");
+        String[] items = csvList.split(",");
+        for (String s: items) {
+            targetWords.add(s);
+        }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
