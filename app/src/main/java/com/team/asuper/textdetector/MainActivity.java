@@ -78,19 +78,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void showMainPage(MenuItem item){
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void showCamera(MenuItem item){
+        Intent intent = new Intent(this, TextDetectionCameraActivity.class);
         intent.putExtra("targetWords", targetWords);
         startActivity(intent);
     }
 
     public void showSetting(MenuItem item){
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("targetWords", targetWords);
         startActivity(intent);
     }
 
     public void showWords(MenuItem item){
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("targetWords", targetWords);
         startActivity(intent);
     }
 
